@@ -23,15 +23,15 @@ def gotoPage1(screen, background):
     background.fill((255, 255, 255))
     disImage = pygame.image.load("Images/oldwin.png")
     gmail = pygame.image.load("Images/gmail.png")
-    newGmail = pygame.transform.scale(gmail,(100,100))
+    newGmail = pygame.transform.scale(gmail,(30,22))
     winsearch = pygame.image.load("Images/winsearch.png")
     disImage = disImage.convert()
     
-    pygame.draw.rect(disImage, (0, 0, 0), [0, 100, 1200, 700], 0)
+    pygame.draw.rect(background, (0, 0, 0), [0, 670, 1280, 75], 0)
     screen.blit(background, (0, 0))
     screen.blit(disImage,(0,0))
-    screen.blit(winsearch,(400,50))
-    screen.blit(newGmail,(400,50))
+    screen.blit(winsearch,(0,670))
+    screen.blit(newGmail,(510,680))
     
 
 
