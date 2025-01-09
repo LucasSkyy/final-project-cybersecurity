@@ -6,7 +6,7 @@ from pygame.locals import QUIT
 def gotoPage2(screen, background):
     
     background.fill((0, 0, 0))
-    chess = pygame.image.load("chess.jpg")
+    chess = pygame.image.load("Images/chess.jpg")
     newChess = pygame.transform.scale(chess, (200,200))
     newChess = newChess.convert()
     
@@ -21,21 +21,27 @@ def gotoPage2(screen, background):
 def gotoPage1(screen, background):
     
     background.fill((255, 255, 255))
-    disImage = pygame.image.load("disney.jpg")
+    disImage = pygame.image.load("Images/oldwin.png")
+    gmail = pygame.image.load("Images/gmail.png")
+    newGmail = pygame.transform.scale(gmail,(100,100))
+    winsearch = pygame.image.load("Images/winsearch.png")
     disImage = disImage.convert()
     
-    pygame.draw.rect(background, (0, 0, 255), [400, 0, 100, 100], 0)
+    pygame.draw.rect(disImage, (0, 0, 0), [0, 100, 1200, 700], 0)
     screen.blit(background, (0, 0))
     screen.blit(disImage,(0,0))
+    screen.blit(winsearch,(400,50))
+    screen.blit(newGmail,(400,50))
     
 
 
 
 pygame.init()
-size = (640, 480)
+size = (1280, 720)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Click a box')
 background = pygame.Surface(size).convert()
+
 
 
 pageNumber = 1
