@@ -3,7 +3,7 @@ from pygame.locals import QUIT
 
 
 
-def gotoPage2(screen, background):
+def scene2(screen, background):
     
     background.fill((0, 0, 0))
     chess = pygame.image.load("Images/chess.jpg")
@@ -18,12 +18,14 @@ def gotoPage2(screen, background):
    
    
 
-def gotoPage1(screen, background):
+def scene1(screen, background):
     
     background.fill((255, 255, 255))
-    disImage = pygame.image.load("Images/oldwin.png")
+    disImage = pygame.image.load("Images/windows_background.jpg")
+    chrome = pygame.image.load("Images/chrome.png")
     gmail = pygame.image.load("Images/gmail.png")
-    newGmail = pygame.transform.scale(gmail,(30,22))
+    newChrome = pygame.transform.scale(chrome,(40,40))
+    newGmail = pygame.transform.scale(gmail,(32,26.5))
     winsearch = pygame.image.load("Images/winsearch.png")
     disImage = disImage.convert()
     
@@ -31,7 +33,8 @@ def gotoPage1(screen, background):
     screen.blit(background, (0, 0))
     screen.blit(disImage,(0,0))
     screen.blit(winsearch,(0,670))
-    screen.blit(newGmail,(510,680))
+    screen.blit(newChrome,(495,675))
+    screen.blit(newGmail,(550,682))
     
 
 
@@ -49,10 +52,10 @@ pageNumber = 1
 clock = pygame.time.Clock()
 while True:
     if pageNumber == 1:
-        gotoPage1(screen, background)
+        scene1(screen, background)
         
     elif pageNumber == 2:
-        gotoPage2(screen, background)
+        scene2(screen, background)
         
         
     clock.tick(30)
