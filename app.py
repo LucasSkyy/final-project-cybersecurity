@@ -21,20 +21,38 @@ def scene2(screen, background):
 def scene1(screen, background):
     
     background.fill((255, 255, 255))
+    #Icons
     disImage = pygame.image.load("Images/windows_background.jpg")
     chrome = pygame.image.load("Images/chrome.png")
     gmail = pygame.image.load("Images/gmail.png")
-    newChrome = pygame.transform.scale(chrome,(40,40))
-    newGmail = pygame.transform.scale(gmail,(32,26.5))
+    gmail1 = pygame.image.load("Images/gmail.png")
+    recy = pygame.image.load("Images/recyclying.png")
+    adobe = pygame.image.load("Images/adobe.png")
     winsearch = pygame.image.load("Images/winsearch.png")
-    disImage = disImage.convert()
+    thispc = pygame.image.load("Images/thispc.png")
+    fileex = pygame.image.load("Images/fileex.png")
+    #Icons Resized
+    newRecy = pygame.transform.scale(recy,(50,50))
+    newChrome = pygame.transform.scale(chrome,(40,40))
+    newGmail = pygame.transform.scale(gmail,(32,25))
+    newAdobe = pygame.transform.scale(adobe,(43,43))
+    Newthispc = pygame.transform.scale(thispc,(43,43))
+    Newfileex = pygame.transform.scale(fileex,(43,43))
+    newGmail1 = pygame.transform.scale(gmail1,(41,31))
+
+    disImage = disImage.convert() 
     
-    pygame.draw.rect(background, (0, 0, 0), [0, 670, 1280, 75], 0)
+    pygame.draw.rect(disImage, (0, 0, 0), [0, 670, 1280, 75], 0)
     screen.blit(background, (0, 0))
     screen.blit(disImage,(0,0))
     screen.blit(winsearch,(0,670))
     screen.blit(newChrome,(495,675))
     screen.blit(newGmail,(550,682))
+    screen.blit(newRecy,(20,30))
+    screen.blit(newAdobe,(22,110))
+    screen.blit(Newthispc,(20,180))
+    screen.blit(Newfileex,(23,245))
+    screen.blit(newGmail1,(25,320))
     
 
 
@@ -67,6 +85,8 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             x = event.pos[0]
             y = event.pos[1]
+            print(x)
+            print(y)
             if x >=400 and x <= 500 and y >=0 and y <=100 and pageNumber == 1:
                 pageNumber = 2
             elif x >=400 and x <= 500 and y >=0 and y <=100 and pageNumber == 2:
