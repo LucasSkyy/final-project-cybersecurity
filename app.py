@@ -4,17 +4,37 @@ from pygame.locals import QUIT
 
 
 def scene2(screen, background):
+    #background
+    background.fill((255, 255, 255))
     
-    background.fill((0, 0, 0))
-    chess = pygame.image.load("Images/chess.jpg")
-    newChess = pygame.transform.scale(chess, (200,200))
-    newChess = newChess.convert()
+    #Sidebar
+    font = pygame.font.Font('freesansbold.ttf', 28)
+    inbox = font.render('Indox', True, (255,0,0), (255,255,255))
+    starred = font.render('Starred', True, (255,0,0), (255,255,255))
+    important = font.render('Important', True, (255,0,0), (255,255,255))
+    sent = font.render('Sent', True, (255,0,0), (255,255,255))
+
+
+   
+    gmaiFull = pygame.image.load("Images/gmailFull.png")
+   
+    #main index
+
+    #search bar
+    pygame.draw.rect(background, (211, 211, 211), [495, 20, 350, 40], 0)
+    
+  
     
     # Rect(left, top, width, height) and pygame.draw.rect(surface, color, rect, width)
-    pygame.draw.rect(background, (255, 0, 0), [400, 0, 100, 100], 0)
-    pygame.draw.rect(background, (255, 255, 0), [600, 400, 60, 80], 4)
+    
+    
     screen.blit(background, (0, 0))
-    screen.blit(newChess, (0,0))
+    screen.blit(inbox, (50, 130))
+    screen.blit(starred, (50, 170))
+    screen.blit(important, (50, 210))
+    screen.blit(sent, (50, 250))
+    screen.blit(gmaiFull, (30, 30))
+
    
    
 
@@ -90,7 +110,7 @@ while True:
             y = event.pos[1]
             print(x)
             print(y)
-            if x >=400 and x <= 500 and y >=0 and y <=100 and pageNumber == 1:
+            if x >=549 and x <= 582 and y >=680 and y <=708 and pageNumber == 1:
                 pageNumber = 2
             elif x >=400 and x <= 500 and y >=0 and y <=100 and pageNumber == 2:
                 pageNumber = 1
