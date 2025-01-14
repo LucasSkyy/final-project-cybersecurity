@@ -31,6 +31,7 @@ def scene1(screen, background):
     winsearch = pygame.image.load("Images/winsearch.png")
     thispc = pygame.image.load("Images/thispc.png")
     fileex = pygame.image.load("Images/fileex.png")
+    setting = pygame.image.load("Images/setting.png")
     #Icons Resized
     newRecy = pygame.transform.scale(recy,(50,50))
     newChrome = pygame.transform.scale(chrome,(40,40))
@@ -39,6 +40,7 @@ def scene1(screen, background):
     Newthispc = pygame.transform.scale(thispc,(43,43))
     Newfileex = pygame.transform.scale(fileex,(43,43))
     newGmail1 = pygame.transform.scale(gmail1,(41,31))
+    newSetting = pygame.transform.scale(setting,(35,31))
 
     disImage = disImage.convert() 
     
@@ -53,6 +55,7 @@ def scene1(screen, background):
     screen.blit(Newthispc,(20,180))
     screen.blit(Newfileex,(23,245))
     screen.blit(newGmail1,(25,320))
+    screen.blit(newSetting,(600,678))
     
 
 
