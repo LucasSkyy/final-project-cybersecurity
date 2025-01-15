@@ -1,12 +1,23 @@
-import pygame, sys
+import os
+import sys
+import pygame
+
+
+log_file = open("warnings.log", "w")
+sys.stderr = log_file
+
 from pygame.locals import QUIT
+from datetime import datetime
 
 def scene3(screen, background):
     background.fill((240, 240, 240))
 
     #font and size
-    font = pygame.font.Font('C:\Windows\Fonts\Arial.ttf', 28)
-    fontsmaller = pygame.font.Font('C:\Windows\Fonts\Arial.ttf', 22)
+    font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 25)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
+    fontmini = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 15)
+    fontminibold = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 18)
+    fontminibolddate = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 15)
 
     #search bar
     pygame.draw.rect(background, (211, 211, 211), [495, 20, 350, 40], 0)
@@ -17,7 +28,7 @@ def scene3(screen, background):
     search_mess = fontsmaller.render('Search mail', True, (0,0,40))
     
     #Sidebar
-    fontsmaller = pygame.font.Font('C:\Windows\Fonts\Arial.ttf', 22)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
     inbox = fontsmaller.render('Inbox', True, (0,0,40))
     starred = fontsmaller.render('Starred', True, (0,0,40))
     important = fontsmaller.render('Important', True, (0,0,40))
@@ -32,7 +43,7 @@ def scene3(screen, background):
     pygame.draw.rect(background, (211, 227, 253), [0, 160, 180, 30], 0)
     pygame.draw.circle(background, (211, 227, 253), (180,175), 15)
 
-    gmaiFull = pygame.image.load("Images/gmailFull.png")
+    gmailFull = pygame.image.load("Images/gmailFull.png")
     back = pygame.image.load("Images/remove.png.png")
 
     inbox_logo = pygame.image.load("Images/inbox_logo.png")
@@ -41,6 +52,8 @@ def scene3(screen, background):
     sent_logo = pygame.image.load("Images/sent_logo.png")
     spam_logo = pygame.image.load("Images/spam_logo.png")
     compose_logo = pygame.image.load("Images/compose_logo.png")
+
+
     Newcompose_logo = pygame.transform.scale(compose_logo,(38,35))
 
     Newstarred_logo = pygame.transform.scale(starred_logo,(28,25))
@@ -49,13 +62,40 @@ def scene3(screen, background):
     newBack = pygame.transform.scale(back,(100,50))
     Newspam_logo = pygame.transform.scale(spam_logo,(43,40))
 
+    #Scam Email Letter
+    pygame.draw.rect(background, (255, 255, 255), [234, 76, 950, 600], 0)
+    pygame.draw.rect(background, (240, 240, 240), [274, 210, 870, 400], 0)
+    pygame.draw.rect(background, (255, 255, 255), [304, 240, 810, 340], 0)
+    garbage = pygame.image.load("Images/garbage.png")
+    profile = pygame.image.load("Images/profile.png")
+    newProfile = pygame.transform.scale(profile,(37,37))
+    newGarbage = pygame.transform.scale(garbage,(320,45))
+    scam_title = font.render('URGENT: Account Activity Alert', True, (0,0,40))
+    email_title = fontminibold.render('RBC Bank', True, (0,0,40))
+    email_address = fontmini.render('<rbccroy.al-bank@gmail.com>', True, (0,0,40))
+    email_dear = fontmini.render('Dear Customer,', True, (0, 0, 40))
+    current_date = datetime.now().strftime('%B %d, %Y')
+    bold_date = fontminibolddate.render(current_date, True, (0, 0, 40))
+    email_letter1 = fontmini.render("We’re letting you know that we’ve detected some unusual activity on your card on", True, (0,0,40))
+    transaction1  = fontminibolddate.render("Approved transaction at SCM*CASH APP for $756.34 on", True, (0,0,40))
+    transaction2  = fontminibolddate.render("Approved transaction at AMAZON for $491.56 on", True, (0,0,40))
+    email_letter2 = fontmini.render("If you did not authorize these changes, please verify your transaction history with your social security number", True, (0,0,40))
+    email_letter3 = fontmini.render("and pin through the link below! Sign On to verify your account details.", True, (0,0,40))
+    actnow = fontminibolddate.render("ACT NOW! CLICK THE LINK BELOW.", True, (0,0,40))
+    link = fontmini.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (0,0,255))
+
+
+
+
+
+    #Scene 3 Blits
     screen.blit(background, (0, 0))
     screen.blit(inbox, (65, 162))
     screen.blit(starred, (65, 200))
     screen.blit(important, (65, 240))
     screen.blit(sent, (65, 280))
     screen.blit(spam, (65, 320))
-    screen.blit(gmaiFull, (30, 20))
+    screen.blit(gmailFull, (30, 20))
     screen.blit(compose, (74, 96))
     screen.blit(newBack, (1170, 10))
     screen.blit(inbox_logo, (20, 163))
@@ -66,6 +106,36 @@ def scene3(screen, background):
     screen.blit(Newsearch_logo, (480, 28))
     screen.blit(search_mess, (530, 28))
     screen.blit(Newcompose_logo, (25, 92))
+    screen.blit(newGarbage, (234,78))
+    screen.blit(newProfile, (244,166))
+    screen.blit(scam_title, (272,124))
+    screen.blit(email_title, (288,171))
+    screen.blit(email_address, (380,173))
+    screen.blit(email_dear, (322,255))
+
+    screen.blit(email_letter1, (346, 293))
+    screen.blit(bold_date, (880, 293))
+
+    screen.blit(transaction1, (346, 323))
+    screen.blit(bold_date, (743, 323))
+    screen.blit(transaction2, (346, 343))
+    screen.blit(bold_date, (690, 343))
+
+    screen.blit(email_letter2, (346, 373))
+    screen.blit(email_letter3, (346, 393))
+    screen.blit(actnow, (798, 393))
+    screen.blit(link, (346, 450))
+
+    pygame.draw.line(screen, (0, 0, 255), (346, 466), (717, 466), 2)
+
+def scene4(screen, background):
+    background.fill((240, 240, 240))
+
+
+
+
+    #Scene 4 Blits
+    screen.blit(background, (0, 0))
 
 
 
@@ -75,9 +145,9 @@ def scene2(screen, background):
     
 
     #font and size
-    font = pygame.font.Font('C:\Windows\Fonts\Arial.ttf', 28)
-    fontsmaller = pygame.font.Font('C:\Windows\Fonts\Arial.ttf', 22)
-    fontboldsmaller = pygame.font.Font('C:\Windows\Fonts\Arialbd.ttf', 22)
+    font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 28)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
+    fontboldsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 16)
 
     #main index
     pygame.draw.rect(background, (255, 255, 255), [220, 75, 1000, 620], 0)
@@ -119,7 +189,7 @@ def scene2(screen, background):
 
 
     #Sidebar
-    fontsmaller = pygame.font.Font('C:\Windows\Fonts\Arial.ttf', 22)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
     inbox = fontsmaller.render('Inbox', True, (0,0,40))
     starred = fontsmaller.render('Starred', True, (0,0,40))
     important = fontsmaller.render('Important', True, (0,0,40))
@@ -133,7 +203,7 @@ def scene2(screen, background):
     pygame.draw.rect(background, (211, 227, 253), [0, 160, 180, 30], 0)
     pygame.draw.circle(background, (211, 227, 253), (180,175), 15)
 
-    gmaiFull = pygame.image.load("Images/gmailFull.png")
+    gmailFull = pygame.image.load("Images/gmailFull.png")
     back = pygame.image.load("Images/remove.png.png")
 
     inbox_logo = pygame.image.load("Images/inbox_logo.png")
@@ -163,7 +233,7 @@ def scene2(screen, background):
     screen.blit(important, (65, 240))
     screen.blit(sent, (65, 280))
     screen.blit(spam, (65, 320))
-    screen.blit(gmaiFull, (30, 20))
+    screen.blit(gmailFull, (30, 20))
     screen.blit(compose, (74, 96))
     screen.blit(newBack, (1170, 10))
     screen.blit(inbox_logo, (20, 163))
@@ -181,7 +251,7 @@ def scene2(screen, background):
     screen.blit(extra_logo, (245 , 248))
     screen.blit(extra_logo, (245 , 283))
     screen.blit(end_logo, (320 , 330))
-    screen.blit(scamText, (335 , 144))
+    screen.blit(scamText, (335 , 150))
     
    
 
@@ -224,52 +294,62 @@ def scene1(screen, background):
     screen.blit(newGmail1,(25,320))
     screen.blit(newSetting,(600,678))
     
+sys.stderr = sys.__stderr__
+log_file.close()
 
 ######################################################################################################################################
 
+# Redirect low-level stderr to a log file
+log_file = open("warnings.log", "w")
+os.dup2(log_file.fileno(), sys.stderr.fileno())  # Redirect stderr
+
+from pygame.locals import QUIT
+
+# Define your scenes (scene1, scene2, scene3) and other setup code here
+# ... (Your existing scene definitions are unchanged)
+
+# Restore stderr to default after Pygame is initialized and images are loaded
+# (Optional: Only if you want regular debug messages on the console after setup)
+os.dup2(sys.__stderr__.fileno(), sys.stderr.fileno())
+log_file.close()
+
+# Initialize Pygame
 pygame.init()
 size = (1280, 720)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Click a box')
 background = pygame.Surface(size).convert()
 
-
-
+# Main game loop
 pageNumber = 1
-
 clock = pygame.time.Clock()
+
 while True:
     if pageNumber == 1:
         scene1(screen, background)
-        
     elif pageNumber == 2:
         scene2(screen, background)
-
     elif pageNumber == 3:
         scene3(screen, background)
-        
-
+    elif pageNumber == 4:
+        scene4(screen, background)
 
     clock.tick(30)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-        
+
         if event.type == pygame.MOUSEBUTTONDOWN:
-            x = event.pos[0]
-            y = event.pos[1]
-            print(x)
-            print(y)
-            if x >=549 and x <= 582 and y >=680 and y <=708 and pageNumber == 1:
+            x, y = event.pos
+            print(x, y)  # Debugging output for mouse click positions
+            if x >= 549 and x <= 582 and y >= 680 and y <= 708 and pageNumber == 1:
                 pageNumber = 2
-            elif x >=1242 and x <= 1260 and y >=27 and y <=47 and pageNumber == 2:
+            elif x >= 1242 and x <= 1260 and y >= 27 and y <= 47 and pageNumber == 2:
                 pageNumber = 1
-            elif x >=220 and x <= 1219 and y >=75 and y <=113 and pageNumber == 2:
+            elif x >= 305 and x <= 1218 and y >= 142 and y <= 175 and pageNumber == 2:
                 pageNumber = 3
-
-            elif x >=600 and x <=640 and y >=400 and y <=480:
-                print("This is the bottom box")
-
+            elif x >= 342 and x <= 722 and y >= 449 and y <= 469 and pageNumber == 3:
+                pageNumber = 4
 
     pygame.display.update()
