@@ -215,6 +215,7 @@ def scene2(screen, background):
     #font and size
     font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 28)
     fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
+    fontsmallest = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 16)
     fontboldsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 16)
 
     #main index
@@ -240,7 +241,11 @@ def scene2(screen, background):
     extra_logo = pygame.image.load("Images/extra.png")
     end_logo = pygame.image.load("Images/end_logo.png")
 
-    scamText = fontboldsmaller.render('RBC Bank', True, (0,0,40))
+    scamText = fontboldsmaller.render('RBC Bank                                   URGENT: Account Activity Alert', True, (0,0,40))
+    email2 = fontsmallest.render('Google Classroom                      Returned: Culminating project', True, (0,0,40))
+    email3 = fontsmallest.render('Instagram                                      You have 15 new notifications', True, (0,0,40))
+    email4 = fontsmallest.render('Glenforest SS                              Course Selection 2025-2026', True, (0,0,40))
+    email5 = fontsmallest.render('Jacob A.                                       Google Docs Sharing', True, (0,0,40))
     
 
 
@@ -320,6 +325,10 @@ def scene2(screen, background):
     screen.blit(extra_logo, (245 , 283))
     screen.blit(end_logo, (320 , 330))
     screen.blit(scamText, (335 , 150))
+    screen.blit(email2, (335 , 185))
+    screen.blit(email3, (335 , 220))
+    screen.blit(email4, (335 , 255))
+    screen.blit(email5, (335 , 290))
     
    
 
