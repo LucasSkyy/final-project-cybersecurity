@@ -2,6 +2,9 @@ import os
 import sys
 import pygame
 
+pygame.init()
+
+pageNumber = 1
 
 log_file = open("warnings.log", "w")
 sys.stderr = log_file
@@ -9,20 +12,23 @@ sys.stderr = log_file
 from pygame.locals import QUIT
 from datetime import datetime
 
-def scene4(screen, background):
+
+
+def scene5(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
 
-
-#Scene 4 images
-    RBC_logo = pygame.image.load("Images/RBC_logo.png")
-    newRBC_logo = pygame.transform.scale(RBC_logo,(110,110))
+#Scene 5 images
+    rbc_logo = pygame.image.load("Images/rbc_logo.png")
+    newrbc_logo = pygame.transform.scale(rbc_logo,(110,110))
     rbc_top = pygame.image.load("Images/rbc_top.png")
-    rbc_wall = pygame.image.load("Images/rbc_wall.png.png")
-    newrbc_wall = pygame.transform.scale(rbc_wall,(400,463))
     rbc_side = pygame.image.load("Images/rbc_side.png")
     newrbc_side = pygame.transform.scale(rbc_side,(230,350))
     rbc_tab = pygame.image.load("Images/rbc_tab.png")
+    zipfile = pygame.image.load("Images/zip.png")
+    newzipfile = pygame.transform.scale(zipfile,(110,110))
+
 
 
     
@@ -35,56 +41,162 @@ def scene4(screen, background):
 
 #Text and boxes
 
-        #font and size
+    #font and size
     fontURL = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 12)
+    font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 19)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
+    fontmini = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 15)
+    fontminibold = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 26)
+    fontminibolddate = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 15)
+
+    #URL
+    pygame.draw.rect(rbc_tab, (18, 18, 18), [273, 49, 500, 20], 0)
+    url_text = fontURL.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (255,255,255))
+
+
+
+
+    #UI text
+    trans_text = font.render("Transaction History", True, (0,0,40))
+    request = fontminibold.render("Please download the transaction history of your", True, (0,0,40))
+    request2 = fontminibold.render("account to check for any malicious activities.", True, (0,0,40))
+    zip_name = fontURL.render("history.zip", True, (0,0,40))
+    
+
+
+
+
+    # Scene 5 Blits
+    screen.blit(background, (0, 0))
+    screen.blit(newrbc_logo, (35, 90))
+    screen.blit(rbc_top, (160, 81))
+    screen.blit(newrbc_side, (-23, 290))
+    screen.blit(trans_text, (22, 250))
+    screen.blit(rbc_tab, (0, 0))
+    screen.blit(url_text, (277, 52))
+    screen.blit(request, (400, 220))
+    screen.blit(request2, (400, 260))
+    screen.blit(newzipfile, (480, 380))
+    screen.blit(zip_name, (508, 500))
+
+
+
+
+def scene4(screen, background):
+    background.fill((240, 240, 240))
+
+    
+    # Load images and fonts (same as before)
+    rbc_logo = pygame.image.load("Images/rbc_logo.png")
+    newrbc_logo = pygame.transform.scale(rbc_logo, (110, 110))
+    rbc_top = pygame.image.load("Images/rbc_top.png")
+    rbc_wall = pygame.image.load("Images/rbc_wall.png")
+    newrbc_wall = pygame.transform.scale(rbc_wall, (476, 463))
+    rbc_side = pygame.image.load("Images/rbc_side.png")
+    newrbc_side = pygame.transform.scale(rbc_side, (230, 350))
+    rbc_tab = pygame.image.load("Images/rbc_tab.png")
+
+    # Font definitions
     font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 25)
     fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
     fontmini = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 15)
     fontminibold = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 18)
     fontminibolddate = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 15)
 
-        #URL
+    #RBC UI
+    pygame.draw.rect(background, (255, 255, 255), [190, 90, 1000, 550], 0)
+    pygame.draw.rect(background, (0, 106, 195), [0, 77, 2000, 70], 0)
+    pygame.draw.rect(background, (0, 106, 195), [10, 239, 10, 40], 0)
+
+    # URL for the login page
     pygame.draw.rect(rbc_tab, (18, 18, 18), [273, 49, 500, 20], 0)
-    url_text = fontURL.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (255,255,255))
+    url_text = fontmini.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (255, 255, 255))
 
-
-    
-        #email
+    # Create input boxes for email, password, PIN, SSN
     email_box = pygame.draw.rect(background, (211, 211, 211), [870, 200, 300, 40], 0)
-    email_text = fontsmaller.render("Email address:", True, (0,0,40))
-
-        #Password
     pass_box = pygame.draw.rect(background, (211, 211, 211), [870, 310, 300, 40], 0)
-    pass_text = fontsmaller.render("Password:", True, (0,0,40))
-
-        #PIN
     pin_box = pygame.draw.rect(background, (211, 211, 211), [870, 420, 300, 40], 0)
-    pin_text = fontsmaller.render("PIN:", True, (0,0,40))
-
-        #SSN
     ssn_box = pygame.draw.rect(background, (211, 211, 211), [870, 530, 300, 40], 0)
-    ssn_text = fontsmaller.render("SSN:", True, (0,0,40))
 
-        #UI text
-    signin_text = font.render("Sign In", True, (0,0,40))
-    
+    # Text prompts
+    email_text = fontsmaller.render("Email address:", True, (0, 0, 40))
+    pass_text = fontsmaller.render("Password:", True, (0, 0, 40))
+    pin_text = fontsmaller.render("PIN:", True, (0, 0, 40))
+    ssn_text = fontsmaller.render("SSN:", True, (0, 0, 40))
 
-
-# Scene 4 Blits
+    # Scene 4 Blits (UI setup)
     screen.blit(background, (0, 0))
-    screen.blit(newRBC_logo, (35, 90))
+    screen.blit(newrbc_logo, (35, 90))
     screen.blit(rbc_top, (160, 81))
+    screen.blit(newrbc_wall, (210, 164))
+    screen.blit(newrbc_side, (-23, 290))
+    screen.blit(rbc_tab, (0, 0))
+    screen.blit(url_text, (277, 52))
+
+    # Display labels
     screen.blit(email_text, (700, 210))
     screen.blit(pass_text, (700, 310))
     screen.blit(pin_text, (700, 420))
     screen.blit(ssn_text, (700, 530))
-    screen.blit(newrbc_wall, (210, 164))
-    screen.blit(newrbc_side, (-23, 290))
-    screen.blit(signin_text, (30, 240))
-    screen.blit(rbc_tab, (0, 0))
-    screen.blit(url_text, (277, 52))
-    
 
+    # User input handling
+    user_input = {"email": "", "password": "", "pin": "", "ssn": ""}
+    current_field = "email"  # Start with the email field
+    global pageNumber
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    user_input[current_field] = user_input[current_field][:-1]
+                elif event.key == pygame.K_RETURN:
+                    # Move to the next field (or submit form if all are filled)
+                    if current_field == "email":
+                        current_field = "password"
+                    elif current_field == "password":
+                        current_field = "pin"
+                    elif current_field == "pin":
+                        current_field = "ssn"
+                    elif current_field == "ssn":
+                        # For example, proceed to next page after SSN is entered
+                        pageNumber = 5
+                        running = False
+                else:
+                    user_input[current_field] += event.unicode
+
+        # Render the text for each input box
+        email_input_surface = font.render(user_input["email"], True, (0, 0, 0))
+        pass_input_surface = font.render(user_input["password"], True, (0, 0, 0))
+        pin_input_surface = font.render(user_input["pin"], True, (0, 0, 0))
+        ssn_input_surface = font.render(user_input["ssn"], True, (0, 0, 0))
+
+        # Display the input in each corresponding box
+        screen.blit(email_input_surface, (875, 208))
+        screen.blit(pass_input_surface, (875, 318))
+        screen.blit(pin_input_surface, (875, 428))
+        screen.blit(ssn_input_surface, (875, 538))
+
+                # Draw a black outline around the selected input field
+        if current_field == "email":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 200, 300, 40], 2)  # Outline for email
+        elif current_field == "password":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 310, 300, 40], 2)  # Outline for password
+        elif current_field == "pin":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 420, 300, 40], 2)  # Outline for PIN
+        elif current_field == "ssn":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 530, 300, 40], 2)  # Outline for SSN
+
+        pygame.display.flip()
+
+    if pageNumber == 5:
+        screen.fill((0, 0, 0))
+        scene5(screen, background)
+        pygame.display.flip()
     
 def scene3(screen, background):
     background.fill((240, 240, 240))
@@ -153,7 +265,7 @@ def scene3(screen, background):
     email_dear = fontmini.render('Dear Customer,', True, (0, 0, 40))
     current_date = datetime.now().strftime('%B %d, %Y')
     bold_date = fontminibolddate.render(current_date, True, (0, 0, 40))
-    email_letter1 = fontmini.render("We’re letting you know that we’ve detected some unusual activity on your card on", True, (0,0,40))
+    email_letter1 = fontmini.render("We're letting you know that we've detected some unusual activity on your card on", True, (0,0,40))
     transaction1  = fontminibolddate.render("Approved transaction at SCM*CASH APP for $756.34 on", True, (0,0,40))
     transaction2  = fontminibolddate.render("Approved transaction at AMAZON for $491.56 on", True, (0,0,40))
     email_letter2 = fontmini.render("If you did not authorize these changes, please verify your transaction history with your social security number", True, (0,0,40))
@@ -246,7 +358,7 @@ def scene2(screen, background):
     email3 = fontsmallest.render('Instagram                                      You have 15 new notifications', True, (0,0,40))
     email4 = fontsmallest.render('Glenforest SS                              Course Selection 2025-2026', True, (0,0,40))
     email5 = fontsmallest.render('Jacob A.                                       Google Docs Sharing', True, (0,0,40))
-    
+
 
 
 
@@ -391,14 +503,23 @@ os.dup2(sys.__stderr__.fileno(), sys.stderr.fileno())
 log_file.close()
 
 # Initialize Pygame
-pygame.init()
 size = (1280, 720)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Click a box')
 background = pygame.Surface(size).convert()
 
 # Main game loop
-pageNumber = 1
+def main():
+    global pageNumber
+    current_scene = "scene4"
+
+    while True:
+        if current_scene == "scene4":
+            current_scene = scene4(screen, background)
+        elif current_scene == "scene5":
+            scene5(screen, background)
+            current_scene = None  # Exit after Scene 5 (or handle further scenes)
+
 clock = pygame.time.Clock()
 
 while True:
@@ -410,6 +531,8 @@ while True:
         scene3(screen, background)
     elif pageNumber == 4:
         scene4(screen, background)
+    elif pageNumber == 5:
+        scene5(screen, background)
 
     clock.tick(30)
     for event in pygame.event.get():
@@ -432,9 +555,11 @@ while True:
                 pageNumber = 2
             elif x >= 1238 and x <= 1278 and y >= 0 and y <= 35 and pageNumber == 4:
                 pageNumber = 3
+            elif x >= 869 and x <= 1170 and y >= 199 and y <= 238 and pageNumber == 4:
+                pageNumber = 5
+            
 
 
 
 
     pygame.display.update()
-  
