@@ -853,6 +853,17 @@ def scene5(screen, background):
 def scene4(screen, background):
     background.fill((240, 240, 240))
 
+    # Font definitions
+    font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 25)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
+    fontmini = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 15)
+    fontminibold = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 18)
+    fontminibolddate = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 15)
+    font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 28)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
+    fontsmallest = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 16)
+    fontboldsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 16)
+    
     # Load images and fonts (same as before)
     rbc_logo = pygame.image.load("Images/rbc_logo.png")
     newrbc_logo = pygame.transform.scale(rbc_logo, (110, 110))
@@ -872,6 +883,7 @@ def scene4(screen, background):
     thispc = pygame.image.load("Images/thispc.png")
     fileex = pygame.image.load("Images/fileex.png")
     setting = pygame.image.load("Images/setting.png")
+    objective3 = fontboldsmaller.render('Type to sign in to your bank account!', True, (0,0,40))
 
     #Icons Resized
     newRecy = pygame.transform.scale(recy,(50,50))
@@ -885,12 +897,6 @@ def scene4(screen, background):
 
 
 
-    # Font definitions
-    font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 25)
-    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
-    fontmini = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 15)
-    fontminibold = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 18)
-    fontminibolddate = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 15)
 
     pygame.draw.rect(background, (0, 0, 0), [0, 670, 1280, 75], 0)
 
@@ -937,6 +943,9 @@ def scene4(screen, background):
     screen.blit(newChrome,(495,675))
     screen.blit(winsearch,(0,670))
     screen.blit(newGmail,(550,682))
+
+    pygame.draw.rect(screen, (173, 216, 230), [286, 466, 300, 50], 0)
+    screen.blit(objective3, (286,482))
     
 
     # User input handling
@@ -1255,6 +1264,7 @@ def scene2(screen, background):
     sent_logo = pygame.image.load("Images/sent_logo.png")
     spam_logo = pygame.image.load("Images/spam_logo.png")
     compose_logo = pygame.image.load("Images/compose_logo.png")
+    objective2 = fontboldsmaller.render('You have a new email! Click to open.', True, (0,0,40))
     Newcompose_logo = pygame.transform.scale(compose_logo,(38,35))
 
     Newstarred_logo = pygame.transform.scale(starred_logo,(28,25))
@@ -1308,6 +1318,8 @@ def scene2(screen, background):
     screen.blit(winsearch,(0,670))
     pygame.draw.rect(screen, (60, 60, 60), [543, 670, 45, 45], 0)
     pygame.draw.rect(screen, (34, 166, 242), [543, 717, 45, 10], 0)
+    pygame.draw.rect(screen, (173, 216, 230), [523, 475, 300, 50], 0)
+    screen.blit(objective2, (538,490))
     screen.blit(newGmail,(550,682))
     
    
@@ -1316,6 +1328,13 @@ def scene1(screen, background):
     
     background.fill((255, 255, 255))
     global pageNumber, sound_time
+
+    #font and size
+    font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 28)
+    fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
+    fontsmallest = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 16)
+    fontboldsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 16)
+
     #Icons
     disImage = pygame.image.load("Images/windows_background.jpg")
     chrome = pygame.image.load("Images/chrome.png")
@@ -1327,6 +1346,7 @@ def scene1(screen, background):
     thispc = pygame.image.load("Images/thispc.png")
     fileex = pygame.image.load("Images/fileex.png")
     setting = pygame.image.load("Images/setting.png")
+    objective1 = fontboldsmaller.render('Welcome, you have a new gmail notification! Click to open the app.', True, (0,0,40))
     
     #Audio
     windows_sound = pygame.mixer.Sound("Images/windows_on.mp3")
@@ -1355,6 +1375,8 @@ def scene1(screen, background):
     screen.blit(Newfileex,(23,245))
     screen.blit(newGmail1,(25,320))
     screen.blit(newSetting,(600,678))
+    pygame.draw.rect(screen, (173, 216, 230), [350, 0, 550, 50], 0)
+    screen.blit(objective1, (373,20))
     sound_time += clock.get_time()
     if sound_time < 1:
         pygame.mixer.Sound.play(windows_sound)
