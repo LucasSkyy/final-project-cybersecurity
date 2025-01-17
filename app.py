@@ -736,7 +736,7 @@ def scene5(screen, background):
     zip_file = pygame.image.load("Images/zip.png")
     newzip = pygame.transform.scale(zip_file,(110,110))
     download = pygame.image.load("Images/download.png")
-    newdownload = pygame.transform.scale(download,(190,55))
+    newdownload = pygame.transform.scale(download,(230,70))
 
 
 
@@ -1376,6 +1376,8 @@ while True:
             print(x, y)  # Debugging output for mouse click positions
             if x >= 549 and x <= 582 and y >= 680 and y <= 708 and pageNumber == 1:
                 pageNumber = 2
+            if x >= 19 and x <= 72 and y >= 313 and y <= 352 and pageNumber == 1:
+                pageNumber = 2
             elif x >= 1242 and x <= 1260 and y >= 27 and y <= 47 and pageNumber == 2:
                 pageNumber = 1
             elif x >= 305 and x <= 1218 and y >= 142 and y <= 175 and pageNumber == 2:
@@ -1388,7 +1390,7 @@ while True:
                 pageNumber = 3
             elif x >= 869 and x <= 1170 and y >= 199 and y <= 238 and pageNumber == 4:
                 pageNumber = 5
-            elif x >= 1025 and x <= 1279 and y >= 498 and y <= 719 and pageNumber == 5:
+            elif x >= 698 and x <= 905 and y >= 410 and y <= 460 and pageNumber == 5:
                 pageNumber = 6
             elif x >= 1075 and x <= 1185 and y >= 565 and y <= 676 and pageNumber == 6:
                 pageNumber = 7
