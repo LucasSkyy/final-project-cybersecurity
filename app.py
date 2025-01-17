@@ -1153,7 +1153,7 @@ def scene3(screen, background):
 
     pygame.draw.line(screen, (0, 0, 255), (346, 466), (717, 466), 2)
 
-
+sound_time = 0
 
 def scene2(screen, background):
     #background
@@ -1315,7 +1315,7 @@ def scene2(screen, background):
 def scene1(screen, background):
     
     background.fill((255, 255, 255))
-    global pageNumber
+    global pageNumber, sound_time
     #Icons
     disImage = pygame.image.load("Images/windows_background.jpg")
     chrome = pygame.image.load("Images/chrome.png")
@@ -1327,6 +1327,10 @@ def scene1(screen, background):
     thispc = pygame.image.load("Images/thispc.png")
     fileex = pygame.image.load("Images/fileex.png")
     setting = pygame.image.load("Images/setting.png")
+    
+    #Audio
+    windows_sound = pygame.mixer.Sound("Images/windows_on.mp3")
+
     #Icons Resized
     newRecy = pygame.transform.scale(recy,(50,50))
     newChrome = pygame.transform.scale(chrome,(40,40))
@@ -1351,6 +1355,9 @@ def scene1(screen, background):
     screen.blit(Newfileex,(23,245))
     screen.blit(newGmail1,(25,320))
     screen.blit(newSetting,(600,678))
+    sound_time += clock.get_time()
+    if sound_time < 1:
+        pygame.mixer.Sound.play(windows_sound)
     
 sys.stderr = sys.__stderr__
 log_file.close()
@@ -1377,6 +1384,8 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Click a box')
 background = pygame.Surface(size).convert()
 
+click_sound = pygame.mixer.Sound("Images/click.mp3")
+
 # Main game loop
 def main():
     global pageNumber
@@ -1387,6 +1396,7 @@ def main():
         elif current_scene == "scene5":
             scene5(screen, background)
             current_scene = None  # Exit after Scene 5 (or handle further scenes)
+
 
 
 clock = pygame.time.Clock()
@@ -1424,6 +1434,7 @@ while True:
             sys.exit()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
+            pygame.mixer.Sound.play(click_sound)
             x, y = event.pos
             print(x, y)  # Debugging output for mouse click positions
             if x >= 549 and x <= 582 and y >= 680 and y <= 708 and pageNumber == 1:
@@ -1474,4 +1485,3 @@ while True:
 
 
     pygame.display.update()
-  
