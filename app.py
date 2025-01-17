@@ -1403,7 +1403,7 @@ log_file.close()
 # Initialize Pygame
 size = (1280, 720)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption('Click a box')
+pygame.display.set_caption('Cybersecurity Bank Email Scam: Exploring Phishing!')
 background = pygame.Surface(size).convert()
 
 click_sound = pygame.mixer.Sound("Images/click.mp3")
