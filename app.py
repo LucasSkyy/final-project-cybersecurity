@@ -880,7 +880,7 @@ def scene4(screen, background):
 
     pygame.draw.rect(screen, (60, 60, 60), [493, 671, 45, 45], 0)
     pygame.draw.rect(screen, (34, 166, 242), [493, 717, 45, 10], 0)
-    
+
     screen.blit(newSetting,(600,678))
     screen.blit(newChrome,(495,675))
     screen.blit(winsearch,(0,670))
@@ -900,7 +900,8 @@ def scene4(screen, background):
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
-                    user_input[current_field] = user_input[current_field][:-1]
+                    if user_input[current_field]:
+                        user_input[current_field] = user_input[current_field][:-1]
                 elif event.key == pygame.K_RETURN:
                     # Move to the next field (or submit form if all are filled)
                     if current_field == "email":
@@ -915,6 +916,11 @@ def scene4(screen, background):
                         running = False
                 else:
                     user_input[current_field] += event.unicode
+
+        pygame.draw.rect(screen, (240, 240, 240), [870, 200, 300, 40], 0)  # Email box
+        pygame.draw.rect(screen, (240, 240, 240), [870, 310, 300, 40], 0)  # Password box
+        pygame.draw.rect(screen, (240, 240, 240), [870, 420, 300, 40], 0)  # PIN box
+        pygame.draw.rect(screen, (240, 240, 240), [870, 530, 300, 40], 0)  # SSN box
 
         # Render the text for each input box
         email_input_surface = font.render(user_input["email"], True, (0, 0, 0))
