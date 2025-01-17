@@ -2,7 +2,8 @@ import os
 import sys
 import pygame
 
-
+pygame.init()
+pageNumber = 1
 log_file = open("warnings.log", "w")
 sys.stderr = log_file
 
@@ -11,10 +12,11 @@ from datetime import datetime
 
 def scene11(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
 #UI
 
-        #Images
+    #Images
     next = pygame.image.load("Images/next.png")
     newnext = pygame.transform.scale(next,(100,100))
     back = pygame.image.load("Images/next.png")
@@ -54,6 +56,7 @@ def scene11(screen, background):
 
 def scene10(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
     next = pygame.image.load("Images/next.png")
     newnext = pygame.transform.scale(next,(60,60))
@@ -173,6 +176,7 @@ def scene10(screen, background):
 
 def scene9(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
     next = pygame.image.load("Images/next.png")
     newnext = pygame.transform.scale(next,(60,60))
@@ -314,6 +318,7 @@ def scene9(screen, background):
 
 def scene8(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
     next = pygame.image.load("Images/next.png")
     newnext = pygame.transform.scale(next,(60,60))
@@ -495,6 +500,7 @@ def scene8(screen, background):
 
 def scene7(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
     next = pygame.image.load("Images/next.png")
     newnext = pygame.transform.scale(next,(60,60))
@@ -654,6 +660,7 @@ def scene7(screen, background):
 
 def scene6(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
 #UI
 
@@ -696,6 +703,7 @@ def scene6(screen, background):
 
 def scene5(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
             #Icons
     disImage = pygame.image.load("Images/windows_background.jpg")
@@ -793,7 +801,15 @@ def scene5(screen, background):
 def scene4(screen, background):
     background.fill((240, 240, 240))
 
-    #Icons
+    # Load images and fonts (same as before)
+    rbc_logo = pygame.image.load("Images/rbc_logo.png")
+    newrbc_logo = pygame.transform.scale(rbc_logo, (110, 110))
+    rbc_top = pygame.image.load("Images/rbc_top.png")
+    rbc_wall = pygame.image.load("Images/rbc_wall.png")
+    newrbc_wall = pygame.transform.scale(rbc_wall, (476, 463))
+    rbc_side = pygame.image.load("Images/rbc_side.png")
+    newrbc_side = pygame.transform.scale(rbc_side, (230, 350))
+    rbc_tab = pygame.image.load("Images/rbc_tab.png")
     disImage = pygame.image.load("Images/windows_background.jpg")
     chrome = pygame.image.load("Images/chrome.png")
     gmail = pygame.image.load("Images/gmail.png")
@@ -805,7 +821,7 @@ def scene4(screen, background):
     fileex = pygame.image.load("Images/fileex.png")
     setting = pygame.image.load("Images/setting.png")
 
-        #Icons Resized
+    #Icons Resized
     newRecy = pygame.transform.scale(recy,(50,50))
     newChrome = pygame.transform.scale(chrome,(40,40))
     newGmail = pygame.transform.scale(gmail,(32,25))
@@ -815,88 +831,122 @@ def scene4(screen, background):
     newGmail1 = pygame.transform.scale(gmail1,(41,31))
     newSetting = pygame.transform.scale(setting,(35,31))
 
-#Scene 4 images
-    RBC_logo = pygame.image.load("Images/RBC_logo.png")
-    newRBC_logo = pygame.transform.scale(RBC_logo,(110,110))
-    rbc_top = pygame.image.load("Images/rbc_top.png")
-    rbc_wall = pygame.image.load("Images/rbc_wall.png")
-    newrbc_wall = pygame.transform.scale(rbc_wall,(476,463))
-    rbc_side = pygame.image.load("Images/rbc_side.png")
-    newrbc_side = pygame.transform.scale(rbc_side,(230,350))
-    rbc_tab = pygame.image.load("Images/rbc_tab.png")
 
 
-    
-#RBC UI
-    pygame.draw.rect(background, (255, 255, 255), [190, 90, 1000, 550], 0)
-    pygame.draw.rect(background, (0, 106, 195), [0, 77, 2000, 70], 0)
-    pygame.draw.rect(background, (0, 106, 195), [10, 239, 10, 40], 0)
-    
-#taskbar
-    pygame.draw.rect(background, (0, 0, 0), [0, 670, 1280, 75], 0)
-
-#Text and boxes
-
-        #font and size
-    fontURL = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 12)
+    # Font definitions
     font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 25)
     fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
     fontmini = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 15)
     fontminibold = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 18)
     fontminibolddate = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 15)
 
-        #URL
+    pygame.draw.rect(background, (0, 0, 0), [0, 670, 1280, 75], 0)
+
+    #RBC UI
+    pygame.draw.rect(background, (255, 255, 255), [190, 90, 1000, 550], 0)
+    pygame.draw.rect(background, (0, 106, 195), [0, 77, 2000, 70], 0)
+    pygame.draw.rect(background, (0, 106, 195), [10, 239, 10, 40], 0)
+
+    # URL for the login page
     pygame.draw.rect(rbc_tab, (18, 18, 18), [273, 49, 500, 20], 0)
-    url_text = fontURL.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (255,255,255))
+    url_text = fontmini.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (255, 255, 255))
 
-
-    
-        #email
+    # Create input boxes for email, password, PIN, SSN
     email_box = pygame.draw.rect(background, (211, 211, 211), [870, 200, 300, 40], 0)
-    email_text = fontsmaller.render("Email address:", True, (0,0,40))
-
-        #Password
     pass_box = pygame.draw.rect(background, (211, 211, 211), [870, 310, 300, 40], 0)
-    pass_text = fontsmaller.render("Password:", True, (0,0,40))
-
-        #PIN
     pin_box = pygame.draw.rect(background, (211, 211, 211), [870, 420, 300, 40], 0)
-    pin_text = fontsmaller.render("PIN:", True, (0,0,40))
-
-        #SSN
     ssn_box = pygame.draw.rect(background, (211, 211, 211), [870, 530, 300, 40], 0)
-    ssn_text = fontsmaller.render("SSN:", True, (0,0,40))
 
-        #UI text
-    signin_text = font.render("Sign In", True, (0,0,40))
+    # Text prompts
+    email_text = fontsmaller.render("Email address:", True, (0, 0, 40))
+    pass_text = fontsmaller.render("Password:", True, (0, 0, 40))
+    pin_text = fontsmaller.render("PIN:", True, (0, 0, 40))
+    ssn_text = fontsmaller.render("SSN:", True, (0, 0, 40))
     
-
-
-# Scene 4 Blits
+    # Scene 4 Blits (UI setup)
     screen.blit(background, (0, 0))
-    screen.blit(newRBC_logo, (35, 90))
+    screen.blit(newrbc_logo, (35, 90))
     screen.blit(rbc_top, (160, 81))
+    screen.blit(newrbc_wall, (210, 164))
+    screen.blit(newrbc_side, (-23, 290))
+    screen.blit(rbc_tab, (0, 0))
+    screen.blit(url_text, (277, 52))
+
+    # Display labels
     screen.blit(email_text, (700, 210))
     screen.blit(pass_text, (700, 310))
     screen.blit(pin_text, (700, 420))
     screen.blit(ssn_text, (700, 530))
-    screen.blit(newrbc_wall, (210, 164))
-    screen.blit(newrbc_side, (-23, 290))
-    screen.blit(signin_text, (30, 240))
-    screen.blit(rbc_tab, (0, 0))
-    screen.blit(url_text, (277, 52))
 
-    screen.blit(newSetting,(600,678))
-    screen.blit(winsearch,(0,670))
     pygame.draw.rect(screen, (60, 60, 60), [493, 671, 45, 45], 0)
     pygame.draw.rect(screen, (34, 166, 242), [493, 717, 45, 10], 0)
-    screen.blit(newGmail,(550,682))
+    
+    screen.blit(newSetting,(600,678))
     screen.blit(newChrome,(495,675))
+    screen.blit(winsearch,(0,670))
+    screen.blit(newGmail,(550,682))
     
 
+    # User input handling
+    user_input = {"email": "", "password": "", "pin": "", "ssn": ""}
+
+    current_field = "email"  # Start with the email field
+    global pageNumber
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    user_input[current_field] = user_input[current_field][:-1]
+                elif event.key == pygame.K_RETURN:
+                    # Move to the next field (or submit form if all are filled)
+                    if current_field == "email":
+                        current_field = "password"
+                    elif current_field == "password":
+                        current_field = "pin"
+                    elif current_field == "pin":
+                        current_field = "ssn"
+                    elif current_field == "ssn":
+                        # For example, proceed to next page after SSN is entered
+                        pageNumber = 5
+                        running = False
+                else:
+                    user_input[current_field] += event.unicode
+
+        # Render the text for each input box
+        email_input_surface = font.render(user_input["email"], True, (0, 0, 0))
+        pass_input_surface = font.render(user_input["password"], True, (0, 0, 0))
+        pin_input_surface = font.render(user_input["pin"], True, (0, 0, 0))
+        ssn_input_surface = font.render(user_input["ssn"], True, (0, 0, 0))
+
+        # Display the input in each corresponding box
+        screen.blit(email_input_surface, (875, 208))
+        screen.blit(pass_input_surface, (875, 318))
+        screen.blit(pin_input_surface, (875, 428))
+        screen.blit(ssn_input_surface, (875, 538))
+
+        # Draw a black outline around the selected input field
+        if current_field == "email":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 200, 300, 40], 2)  # Outline for email
+        elif current_field == "password":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 310, 300, 40], 2)  # Outline for password
+        elif current_field == "pin":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 420, 300, 40], 2)  # Outline for PIN
+        elif current_field == "ssn":
+            pygame.draw.rect(screen, (0, 0, 0), [870, 530, 300, 40], 2)  # Outline for SSN
+        pygame.display.flip()
+
+    if pageNumber == 5:
+        screen.fill((0, 0, 0))
+        scene5(screen, background)
+        pygame.display.flip()
     
 def scene3(screen, background):
     background.fill((240, 240, 240))
+    global pageNumber
 
      #Icons
     disImage = pygame.image.load("Images/windows_background.jpg")
@@ -1050,6 +1100,7 @@ def scene3(screen, background):
 def scene2(screen, background):
     #background
     background.fill((240, 240, 240))
+    global pageNumber
     
         #Icons
     disImage = pygame.image.load("Images/windows_background.jpg")
@@ -1206,6 +1257,7 @@ def scene2(screen, background):
 def scene1(screen, background):
     
     background.fill((255, 255, 255))
+    global pageNumber
     #Icons
     disImage = pygame.image.load("Images/windows_background.jpg")
     chrome = pygame.image.load("Images/chrome.png")
@@ -1262,16 +1314,23 @@ os.dup2(sys.__stderr__.fileno(), sys.stderr.fileno())
 log_file.close()
 
 # Initialize Pygame
-pygame.init()
 size = (1280, 720)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Click a box')
 background = pygame.Surface(size).convert()
 
 # Main game loop
+def main():
+    global pageNumber
+    current_scene = "scene4"
+    while True:
+        if current_scene == "scene4":
+            current_scene = scene4(screen, background)
+        elif current_scene == "scene5":
+            scene5(screen, background)
+            current_scene = None  # Exit after Scene 5 (or handle further scenes)
 
 
-pageNumber = 1
 clock = pygame.time.Clock()
 
 while True:
