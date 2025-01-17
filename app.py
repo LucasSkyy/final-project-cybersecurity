@@ -193,7 +193,7 @@ def scene9(screen, background):
     RBC_logo = pygame.image.load("Images/RBC_logo.png")
     newRBC_logo = pygame.transform.scale(RBC_logo,(110,110))
     rbc_top = pygame.image.load("Images/rbc_top.png")
-    rbc_wall = pygame.image.load("Images/rbc_wall.png.png")
+    rbc_wall = pygame.image.load("Images/rbc_wall.png")
     newrbc_wall = pygame.transform.scale(rbc_wall,(476,463))
     rbc_side = pygame.image.load("Images/rbc_side.png")
     newrbc_side = pygame.transform.scale(rbc_side,(230,350))
@@ -819,7 +819,7 @@ def scene4(screen, background):
     RBC_logo = pygame.image.load("Images/RBC_logo.png")
     newRBC_logo = pygame.transform.scale(RBC_logo,(110,110))
     rbc_top = pygame.image.load("Images/rbc_top.png")
-    rbc_wall = pygame.image.load("Images/rbc_wall.png.png")
+    rbc_wall = pygame.image.load("Images/rbc_wall.png")
     newrbc_wall = pygame.transform.scale(rbc_wall,(476,463))
     rbc_side = pygame.image.load("Images/rbc_side.png")
     newrbc_side = pygame.transform.scale(rbc_side,(230,350))
@@ -1276,7 +1276,6 @@ clock = pygame.time.Clock()
 
 while True:
     check_on = False
-    check = pygame.image.load("Images/check.png")
 
     if pageNumber == 1:
         scene1(screen, background)
