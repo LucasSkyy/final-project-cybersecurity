@@ -705,97 +705,149 @@ def scene5(screen, background):
     background.fill((240, 240, 240))
     global pageNumber
 
-            #Icons
+    # Load assets (icons, images, fonts)
     disImage = pygame.image.load("Images/windows_background.jpg")
     chrome = pygame.image.load("Images/chrome.png")
     gmail = pygame.image.load("Images/gmail.png")
-    gmail1 = pygame.image.load("Images/gmail.png")
     recy = pygame.image.load("Images/recyclying.png")
     adobe = pygame.image.load("Images/adobe.png")
     winsearch = pygame.image.load("Images/winsearch.png")
     thispc = pygame.image.load("Images/thispc.png")
     fileex = pygame.image.load("Images/fileex.png")
     setting = pygame.image.load("Images/setting.png")
+    gmail1 = pygame.image.load("Images/gmail.png")
 
-        #Icons Resized
-    newRecy = pygame.transform.scale(recy,(50,50))
-    newChrome = pygame.transform.scale(chrome,(40,40))
-    newGmail = pygame.transform.scale(gmail,(32,25))
-    newAdobe = pygame.transform.scale(adobe,(43,43))
-    Newthispc = pygame.transform.scale(thispc,(43,43))
-    Newfileex = pygame.transform.scale(fileex,(43,43))
-    newGmail1 = pygame.transform.scale(gmail1,(41,31))
-    newSetting = pygame.transform.scale(setting,(35,31))
+    newRecy = pygame.transform.scale(recy, (50, 50))
+    newChrome = pygame.transform.scale(chrome, (40, 40))
+    newGmail = pygame.transform.scale(gmail, (32, 25))
+    newAdobe = pygame.transform.scale(adobe, (43, 43))
+    Newthispc = pygame.transform.scale(thispc, (43, 43))
+    Newfileex = pygame.transform.scale(fileex, (43, 43))
+    newGmail1 = pygame.transform.scale(gmail1, (41, 31))
+    newSetting = pygame.transform.scale(setting, (35, 31))
 
     RBC_logo = pygame.image.load("Images/RBC_logo.png")
-    newRBC_logo = pygame.transform.scale(RBC_logo,(110,110))
+    newRBC_logo = pygame.transform.scale(RBC_logo, (110, 110))
     rbc_top = pygame.image.load("Images/rbc_top.png")
     rbc_side = pygame.image.load("Images/rbc_side.png")
-    newrbc_side = pygame.transform.scale(rbc_side,(230,350))
+    newrbc_side = pygame.transform.scale(rbc_side, (230, 350))
     rbc_tab = pygame.image.load("Images/rbc_tab.png")
     zip_file = pygame.image.load("Images/zip.png")
-    newzip = pygame.transform.scale(zip_file,(110,110))
+    newzip = pygame.transform.scale(zip_file, (110, 110))
     download = pygame.image.load("Images/download.png")
-    newdownload = pygame.transform.scale(download,(230,70))
+    newdownload = pygame.transform.scale(download, (230, 70))
 
+    # Load notification image (adjusted size)
+    virus_notification = pygame.image.load("Images/virus_notification.png")
+    newvirus_notification = pygame.transform.scale(virus_notification, (500, 200))
 
-
-
-    
-#RBC UI
-    pygame.draw.rect(background, (255, 255, 255), [190, 90, 1000, 550], 0)
-    pygame.draw.rect(background, (0, 106, 195), [0, 77, 2000, 70], 0)
-    pygame.draw.rect(background, (0, 106, 195), [10, 239, 10, 40], 0)
-    
-
-
-#Text and boxes
-
-        #font and size
+    # Fonts
     fontURL = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 12)
     font = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 19)
     fontsmaller = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 22)
-    fontmini = pygame.font.Font('C:\\Windows\\Fonts\\Arial.ttf', 15)
     fontminibold = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 26)
-    fontminibolddate = pygame.font.Font('C:\\Windows\\Fonts\\Arialbd.ttf', 15)
 
-        #URL
-    pygame.draw.rect(rbc_tab, (18, 18, 18), [273, 49, 500, 20], 0)
-    url_text = fontURL.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (255,255,255))
+    # Notification settings
+    screen_width, screen_height = screen.get_size()
+    notification_width = 500
+    notification_height = 200
+    notification_x = screen_width  # Start off-screen to the right
+    notification_target_x = screen_width - notification_width - 20  # 20px margin from the right
+    notification_y = screen_height - notification_height - 20  # 20px margin from the bottom
+    notification_speed = 15  # Speed of sliding (pixels per frame)
+    sliding_started = False
+    sliding_done = False
+    notification_start_time = None  # To track when the notification starts
+    switch_scene_time = None  # To track when the scene should change
 
-#taskbar
-    pygame.draw.rect(background, (0, 0, 0), [0, 670, 1280, 75], 0)
+    # Download button coordinates
+    download_button_rect = pygame.Rect(680, 400, 230, 70)
 
-        #UI text
-    trans_text = font.render("Transaction History", True, (0,0,40))
-    request = fontminibold.render("Please download the transaction history of your", True, (0,0,40))
-    request2 = fontminibold.render("account to check for any malicious activities.", True, (0,0,40))
-    zip_name = fontURL.render("history.zip", True, (0,0,40))
-    
+    # Scene loop
+    running = True
+    while running:
+        current_time = pygame.time.get_ticks()
 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left mouse button
+                    if download_button_rect.collidepoint(event.pos):  # Check if clicked inside the button
+                        sliding_started = True
+                        notification_start_time = current_time  # Track when the notification starts
+                        switch_scene_time = None  # Reset switch scene timer
 
+        # Hover effect for the button (scale down on hover)
+        if download_button_rect.collidepoint(pygame.mouse.get_pos()):
+            button_width = 230 * 0.9
+            button_height = 70 * 0.9
+        else:
+            button_width = 230
+            button_height = 70
 
+        # Slide notification logic
+        if sliding_started and not sliding_done:
+            if notification_x > notification_target_x:
+                notification_x -= notification_speed  # Move notification left
+            if notification_x <= notification_target_x:
+                sliding_done = True  # Stop sliding when the target position is reached
+                # Once the notification finishes sliding, start the delay for scene switch
+                switch_scene_time = current_time
 
-# Scene 5 Blits
-    screen.blit(background, (0, 0))
-    screen.blit(newRBC_logo, (35, 90))
-    screen.blit(rbc_top, (160, 81))
-    screen.blit(newrbc_side, (-23, 290))
-    screen.blit(trans_text, (22, 250))
-    screen.blit(rbc_tab, (0, 0))
-    screen.blit(url_text, (277, 52))
-    screen.blit(request, (400, 220))
-    screen.blit(request2, (400, 260))
-    screen.blit(newzip, (480, 380))
-    screen.blit(zip_name, (508, 500))
-    screen.blit(newdownload, (680, 400))
+        # Check if 3 seconds have passed since notification finished sliding
+        if switch_scene_time and current_time - switch_scene_time > 5000:  # 3 seconds
+            pageNumber = 6  # Switch to scene 6 after 3 seconds
+            return scene6(screen, background)  # Call scene 6
 
-    screen.blit(newSetting,(600,678))
-    screen.blit(winsearch,(0,670))
-    pygame.draw.rect(screen, (60, 60, 60), [493, 671, 45, 45], 0)
-    pygame.draw.rect(screen, (34, 166, 242), [493, 717, 45, 10], 0)
-    screen.blit(newGmail,(550,682))
-    screen.blit(newChrome,(495,675))
+        # Draw the background
+        screen.blit(background, (0, 0))
+        pygame.draw.rect(background, (255, 255, 255), [190, 90, 1000, 550], 0)
+        pygame.draw.rect(background, (0, 106, 195), [0, 77, 2000, 70], 0)
+        pygame.draw.rect(background, (0, 106, 195), [10, 239, 10, 40], 0)
+
+        # Draw UI elements
+        screen.blit(newRBC_logo, (35, 90))
+        screen.blit(rbc_top, (160, 81))
+        screen.blit(newrbc_side, (-23, 290))
+        screen.blit(rbc_tab, (0, 0))
+        pygame.draw.rect(rbc_tab, (18, 18, 18), [273, 49, 500, 20], 0)
+        url_text = fontURL.render("http://www.rbccroyal-bank.com/person.al/login-page.html", True, (255, 255, 255))
+        screen.blit(url_text, (277, 52))
+        trans_text = font.render("Transaction History", True, (0, 0, 40))
+        request = fontminibold.render("Please download the transaction history of your", True, (0, 0, 40))
+        request2 = fontminibold.render("account to check for any malicious activities.", True, (0, 0, 40))
+        screen.blit(trans_text, (22, 250))
+        screen.blit(request, (400, 220))
+        screen.blit(request2, (400, 260))
+        screen.blit(newzip, (480, 380))
+        zip_name = fontURL.render("history.zip", True, (0, 0, 40))
+        screen.blit(zip_name, (508, 500))
+        screen.blit(newdownload, (680, 400))
+
+        # Taskbar icons
+        pygame.draw.rect(screen, (0, 0, 0), [0, 670, 1280, 75], 0)
+        pygame.draw.rect(screen, (60, 60, 60), [493, 671, 45, 45], 0)
+        pygame.draw.rect(screen, (34, 166, 242), [493, 717, 45, 10], 0)
+        screen.blit(newSetting, (600, 678))
+        screen.blit(newChrome, (495, 675))
+        screen.blit(winsearch, (0, 670))
+        screen.blit(newGmail, (550, 682))
+
+        # Draw the download button with the new size
+        download_button_rect.width = button_width
+        download_button_rect.height = button_height
+        screen.blit(newdownload, (680, 400))
+
+        # Draw sliding notification (now it's the larger image)
+        if sliding_started:
+            screen.blit(newvirus_notification, (notification_x, notification_y))  # Draw the notification image at the new position
+
+        # Update display
+        pygame.display.flip()
+        pygame.time.Clock().tick(60)
+
 
     
 def scene4(screen, background):
